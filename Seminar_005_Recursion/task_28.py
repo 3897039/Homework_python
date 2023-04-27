@@ -6,3 +6,15 @@
 # 2 2
 #     4 
 
+a = int(input('Введите число А: '))
+b = int(input('Введите число В: '))
+
+
+def sum(a, b):
+    if a == 0:
+        return b
+    else:
+        return sum(a-1, b+1)
+  
+
+print('Сумма двух чисел равна', sum(a,b))

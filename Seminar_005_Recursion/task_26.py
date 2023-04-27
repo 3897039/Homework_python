@@ -7,11 +7,13 @@
 a = int(input('Введите число А: '))
 b = int(input('Введите степень В: '))
 
+
 def degreeA (a, b):
     if (b == 1):
         return (a)
     if (b != 1):
         return (a * degreeA(a, b - 1))
+
 
 print('Число А в степени В равно', degreeA(a, b))
     
