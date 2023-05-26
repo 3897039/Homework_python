@@ -26,9 +26,9 @@ def contacts_output(contacts: list):  #выводит все контакты
 
 
 def contact_added(new_doc: list):  #добавление контакта
-    print("Введите контакт c помощью ',' в качестве разделителя")
+    print("Введите контакт c помощью ',' в качестве разделителя \",\" ")
     new_contact = input()
-    new_doc.append(new_contact)
+    new_doc.append(new_contact.strip().split(','))
 
 
 def contact_find(contacts: list, search_lists: list):  #поиск контакта
@@ -49,8 +49,7 @@ def contact_change(contacts: list): #редактирование контакт
                 contacts[i] = change.strip().split(',')
 
 
-#  Удалить контакт
-def contact_del(contacts: list):
+def contact_del(contacts: list):      #удаление контакта
     del_any = input("Кого вы хотите удалить? ")
     for i in range(len(contacts)):
         for j in range(len(contacts[i])):
@@ -63,18 +62,39 @@ def contact_del(contacts: list):
 # Вызов меню и его пунктов
 main_file = 'file.txt'
 lists_contacts = file_read(main_file)
-all_command = {'1' :  contacts_output, '2' : contact_added, '3' : contact_find, '4' : contact_change, '5' : contact_del, '6' : file_save}
+
 print("Выберите пункт \n"
       "1 - показать все контакты\n"
       "2 - добавить контакт\n"
       "3 - найти контакт\n"
       "4 - редактировать контакт\n"
       "5 - удалить контакт\n"
-      "6 - сохранение файла\n")
+      "6 - сохранение файла\n"
+      "7 - выход из меню\n")
       
-while True:
-    command = input('Команда: > ')
-    if command in all_command:
-        all_command[command](main_file)
-    else:
-        print(' command error!')
+flag = True
+while flag:
+    comand = int(input('Введите пункт из меню: '))
+    while flag:
+        match comand:
+            case 1:
+                contacts_output(lists_contacts)
+                break
+            case 2:
+                contact_added(lists_contacts)
+                break
+            case 3:
+                search_lists = list()
+                file_read(contact_find(lists_contacts, search_lists))
+                break
+            case 4:
+                contact_change(lists_contacts)
+                break
+            case 5:
+                contact_del(lists_contacts)
+                break
+            case 6:
+                file_save(main_file, lists_contacts)
+                break
+            case 7:
+                flag = False
